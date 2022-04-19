@@ -1,4 +1,5 @@
 require('dotenv').config();
+require("cors");
 const express = require('express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const proxyMiddleware = createProxyMiddleware({
@@ -9,5 +10,6 @@ const proxyMiddleware = createProxyMiddleware({
   },
 });
 const app = express();
+app.use(cors({ origin: "https://app.relics.ai"}))
 app.use('/', proxyMiddleware);
 app.listen(process.env.PORT || 8080);
